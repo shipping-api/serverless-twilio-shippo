@@ -1,0 +1,18 @@
+service: serverless-tracking
+
+provider:
+  name: aws
+  runtime: nodejs4.3
+  stage: dev
+  region: us-west-2
+  memorySize: 128
+
+functions:
+  smsUpdates:
+    handler: handler.smsUpdates
+    events:
+      - http:
+          path: smsupdates
+          method: post
+          integration: lambda
+          cors: true

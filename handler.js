@@ -6,11 +6,9 @@ module.exports.smsUpdates = (event, context, callback) => {
       trackingStatus = body.tracking_status,
       trackingLocation = '';
 
-  if (trackingStatus.location) {
-    if (trackingStatus.location.city) {
+  if (trackingStatus.location && trackingStatus.location.city) {
       trackingLocation = trackingStatus.location.city + ', '
       + trackingStatus.location.state
-    }
   } else {
     trackingLocation = 'UNKNOWN';
   };
@@ -21,6 +19,9 @@ module.exports.smsUpdates = (event, context, callback) => {
         input: event,
       }),
     };
+
+	const destinationNumber = '+12025550119'; // Replace with your own number
+	const twilioNumber = '+12025550119'; // Replace with your Twilio number
 
   twilio.sendMessage({
     to: '+DestinationNumber',

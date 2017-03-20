@@ -56,11 +56,9 @@ module.exports.smsUpdates = (event, context, callback) => {
       trackingStatus = body.tracking_status,
       trackingLocation = '';
 
-  if (trackingStatus.location) {
-    if (trackingStatus.location.city) {
-      trackingLocation = trackingStatus.location.city + ', ' |
-          trackingStatus.location.state
-    }
+  if (trackingStatus.location && trackingStatus.location.city) {
+      trackingLocation = trackingStatus.location.city + ', '
+      + trackingStatus.location.state
   } else {
     trackingLocation = 'UNKNOWN';
   };
@@ -78,17 +76,13 @@ module.exports.smsUpdates = (event, context, callback) => {
       trackingStatus = body.tracking_status,
       trackingLocation = '';
 
-  if (trackingStatus.location) {
-    if (trackingStatus.location.city) {
-      trackingLocation = trackingStatus.location.city + ', ' |
-          trackingStatus.location.state
-    }
+  if (trackingStatus.location && trackingStatus.location.city) {
+      trackingLocation = trackingStatus.location.city + ', '
+      + trackingStatus.location.state
   } else {
     trackingLocation = 'UNKNOWN';
   };
 
-  // This is for logging out success respponses back to Shippo
-  // We don't really need to send a body back, but it won't harm anything
   const response = {
       statusCode: 200,
       body: JSON.stringify({
@@ -96,11 +90,12 @@ module.exports.smsUpdates = (event, context, callback) => {
       }),
     };
 
-  // You can find more info about Twilio's node client at
-  //  https://www.twilio.com/docs/libraries/node
+	const destinationNumber = '+12025550119'; // Replace with your own number
+	const twilioNumber = '+12025550118'; // Replace with your Twilio number
+
   twilio.sendMessage({
-    to: '+1-DESTINATION-NUMBER',
-    from: '+1-TWILIO-NUMBER',
+    to: destinationNumber,
+    from: twilioNumber,
     body: 'Tracking #: ' + body.tracking_number +
           '\nStatus: ' + trackingStatus.status +
           '\nLocation: ' + trackingLocation

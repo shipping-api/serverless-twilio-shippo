@@ -1,6 +1,6 @@
 # Using AWS Lambda & API Gateway to Send Shipment Tracking Updates via SMS with Shippo & Twilio
 
-In this project, we’re going to recieve a notification from webhook about an a physical shipment in transit and trigger an SMS with the updated tracking information.  We'll build an AWS Lambda function that will trigger whenever Shippo pushes an update about a shipment to our AWS API Gateway Endpoint. Inside of the Lambda function, we’re going to call Twilio to send an SMS update with our tracking info provided by Shippo’s webhook.
+In this project, we’re going to receive a notification from webhook about an a physical shipment in transit and trigger an SMS with the updated tracking information.  We'll build an AWS Lambda function that will trigger whenever Shippo pushes an update about a shipment to our AWS API Gateway Endpoint. Inside of the Lambda function, we’re going to call Twilio to send an SMS update with our tracking info provided by Shippo’s webhook.
 
 Now, I know what you’re thinking, this sounds pretty complicated and requires a lot of manual set up and repeated uploading of JavaScript files to AWS, but you’d be wrong. We’re going to use Serverless to do a lot of the heavy lifting on this for us, because I’m all about writing less code to do more.
 
@@ -18,13 +18,13 @@ You can get Serverless by installing it globally on your machine using:
 
 `npm install -g serverless`
 
-Serverless provides a way to easily create a new service by just using their CLI like so (you can omit the path if you don't want it to create a directory for you):
+Serverless provides a way to easily create a new service by just using their CLI as follows (you can omit the path if you don't want it to create a directory for you):
 
 `serverless create --template aws-nodejs --path twilio-shippo`
 
 Before you dig into creating your Lambda function, you'll want to setup a User in your AWS account for Serverless to have access for creating everything. They have a useful guide [here](https://serverless.com/framework/docs/providers/aws/guide/credentials/) that can walk you through getting your credentials setup.
 
-Its as simply as adding a user `serverless-admin` with `AdministratorAccess` and using the credentials with the following command:
+It's as simple as adding a user `serverless-admin` with `AdministratorAccess` and using the credentials with the following command:
 
 `serverless config credentials --provider aws --key ACCESS_KEY_ID --secret SECRET_ACCESS_KEY`
 
@@ -47,7 +47,7 @@ module.exports.smsUpdates = (event, context, callback) => {
 
 We are creating a POST endpoint, since Shippo will be POSTing the tracking updates to us. We'll then parse the data to relay over to Twilio to send out our SMS messages.
 
-First, lets parse the body of the message that Shippo has sent to us. We'll set up a few variable to prevent repeating ourselves, and we'll add some logic in there to handle if there is no location provided with our tracking update.
+First, let's parse the body of the message that Shippo has sent to us. We'll set up a few variable to prevent repeating ourselves, and we'll add some logic in there to handle if there is no location provided with our tracking update.
 
 ```javascript
 module.exports.smsUpdates = (event, context, callback) => {
@@ -68,7 +68,7 @@ module.exports.smsUpdates = (event, context, callback) => {
 ```
 Now that we have our logic built for handling the body of the response and safely handle when we don't get a location with our tracking status, we can dig into sending a formatted SMS using Twilio.
 
-The basic format for sending Twilio messages requires we have a destination number (for sending our SMS to), our Twilio number that we're sending from, and a message to send (duh!).
+The basic format for sending Twilio messages requires that we have a destination number (for sending our SMS to), our Twilio number that we're sending from, and a message to send (duh!).
 
 Here is what it looks like once we add sending our message:
 ```javascript

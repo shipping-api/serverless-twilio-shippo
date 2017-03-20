@@ -1,4 +1,4 @@
-const twilio = twilio = require('twilio')('TWILIO_ACCOUNT_SID', 'TWILIO_AUTH_TOKEN');
+const twilio = require('twilio')('TWILIO_ACCOUNT_SID', 'TWILIO_AUTH_TOKEN');
 
 module.exports.smsUpdates = (event, context, callback) => {
   console.log(event);
@@ -8,8 +8,8 @@ module.exports.smsUpdates = (event, context, callback) => {
 
   if (trackingStatus.location) {
     if (trackingStatus.location.city) {
-      trackingLocation = trackingStatus.location.city + ', ' |
-          trackingStatus.location.state
+      trackingLocation = trackingStatus.location.city + ', '
+      + trackingStatus.location.state
     }
   } else {
     trackingLocation = 'UNKNOWN';
@@ -23,8 +23,8 @@ module.exports.smsUpdates = (event, context, callback) => {
     };
 
   twilio.sendMessage({
-    to: '+1-DESTINATION-NUMBER',
-    from: '+1-TWILIO-NUMBER',
+    to: '+DestinationNumber',
+    from: '+TwilioNumber',
     body: 'Tracking #: ' + body.tracking_number +
           '\nStatus: ' + trackingStatus.status +
           '\nLocation: ' + trackingLocation

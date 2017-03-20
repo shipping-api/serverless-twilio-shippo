@@ -1,0 +1,28 @@
+{
+  "name": "serverless-twilio-shippo",
+  "version": "1.0.0",
+  "description": "Guide for using Serverless with Twilio and Shippo for SMS updates on tracking",
+  "main": "handler.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mootrichard/serverless-twilio-shippo.git"
+  },
+  "keywords": [
+    "Shippo",
+    "Serverless",
+    "Twilio",
+    "Webhook"
+  ],
+  "author": "Richard Moot",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mootrichard/serverless-twilio-shippo/issues"
+  },
+  "homepage": "https://github.com/mootrichard/serverless-twilio-shippo#readme",
+  "dependencies": {
+    "twilio": "^2.11.1"
+  }
+}

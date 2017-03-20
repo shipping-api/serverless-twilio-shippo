@@ -20,12 +20,12 @@ module.exports.smsUpdates = (event, context, callback) => {
       }),
     };
 
-	const destinationNumber = '+12025550119'; // Replace with your own number
-	const twilioNumber = '+12025550119'; // Replace with your Twilio number
+  const destinationNumber = '+12025550119'; // Replace with your own number
+  const twilioNumber = '+12025550118'; // Replace with your Twilio number
 
   twilio.sendMessage({
-    to: '+DestinationNumber',
-    from: '+TwilioNumber',
+    to: destinationNumber,
+    from: twilioNumber,
     body: 'Tracking #: ' + body.tracking_number +
           '\nStatus: ' + trackingStatus.status +
           '\nLocation: ' + trackingLocation

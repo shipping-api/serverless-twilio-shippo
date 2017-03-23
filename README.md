@@ -22,9 +22,14 @@ Serverless provides a way to easily create a new service by just using their CLI
 
 `serverless create --template aws-nodejs --path twilio-shippo`
 
-Before you dig into creating your Lambda function, you'll want to setup a User in your AWS account for Serverless to have access for creating everything. They have a useful guide [here](https://serverless.com/framework/docs/providers/aws/guide/credentials/) that can walk you through getting your credentials setup.
+Before you dig into creating your Lambda function, you'll want to setup a User in your AWS account for Serverless to have access for creating everything. They have a useful guide [here](https://serverless.com/framework/docs/providers/aws/guide/credentials/) that can walk you through getting your credentials setup
 
-It's as simple as adding a user `serverless-admin` with `AdministratorAccess` and using the credentials with the following command:
+***
+>**WARNING**: *`In a production environment, we recommend limiting the permissions of the Serverless IAM user to the AWS services required for the project. Consider using a separate AWS account in the interim, if you cannot get permission to your organization's primary AWS accounts.`*
+
+***
+
+Setting up a user *can* be as simple as adding a user `serverless-admin` with `AdministratorAccess` and using the credentials with the following command:
 
 `serverless config credentials --provider aws --key ACCESS_KEY_ID --secret SECRET_ACCESS_KEY`
 
